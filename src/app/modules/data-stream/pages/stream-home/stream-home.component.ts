@@ -98,6 +98,8 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
         console.error('getUserMedia is not supported in this environment!');
         return;
       }
+      console.log('navigator.mediaDevices:', navigator.mediaDevices);
+      console.log('navigator.mediaDevices.getUserMedia:', navigator.mediaDevices?.getUserMedia);
       this.stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
       this.localVideo.nativeElement.srcObject = this.stream;
       await this.localVideo.nativeElement.play();
