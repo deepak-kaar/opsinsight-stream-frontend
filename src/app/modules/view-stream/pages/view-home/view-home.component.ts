@@ -18,7 +18,9 @@ export class ViewHomeComponent implements OnInit, OnDestroy {
   private broadcasterId: string | null = null;
 
 
-  backendUrl = 'http://166.87.229.162:3000'; // ⚠️ Replace with your backend IP/port
+  // backendUrl = 'http://166.87.229.162:3000';
+  backendUrl = 'https://socket-server-1-lb6b.onrender.com';
+  //  // ⚠️ Replace with your backend IP/port
   streams: any[] = [];
   selectedStreamId: string | null = null;
   videoUrl: string | null = null;
