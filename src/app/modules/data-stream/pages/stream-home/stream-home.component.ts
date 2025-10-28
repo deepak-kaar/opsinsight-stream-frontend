@@ -100,7 +100,10 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
       }
       console.log('navigator.mediaDevices:', navigator.mediaDevices);
       console.log('navigator.mediaDevices.getUserMedia:', navigator.mediaDevices?.getUserMedia);
+      console.log('Requesting camera...');
       this.stream = await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+      console.log('Camera access granted', this.stream);
+
       this.localVideo.nativeElement.srcObject = this.stream;
       await this.localVideo.nativeElement.play();
 
@@ -109,8 +112,9 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
       // Announce broadcaster only after camera is ready
       this.socket.emit('broadcaster');
       console.log('📡 Broadcasting started...');
-    } catch (err) {
+    } catch (err:any) {
       console.error('Error accessing camera:', err);
+      if (err.name) console.error('Error name:', err.name);
     }
   }
 
