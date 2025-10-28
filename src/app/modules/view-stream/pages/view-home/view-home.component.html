@@ -32,6 +32,48 @@
         <h2 class="text-lg font-semibold">Viewer</h2>
       
         <video #remoteVideo autoplay playsinline controls></video>
+
+        <div class="recorded-streams-container">
+            <h2>🎥 Recorded Streams</h2>
+          
+            <!-- Loading spinner -->
+            <div *ngIf="isLoading" class="loading">Loading streams...</div>
+          
+            <!-- Error message -->
+            <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+          
+            <!-- Streams list -->
+            <div class="stream-list" *ngIf="!isLoading && streams.length > 0">
+              <div 
+                class="stream-card"
+                *ngFor="let stream of streams"
+                (click)="selectStream(stream.streamId)"
+                [class.active]="selectedStreamId === stream.streamId"
+              >
+                <div class="stream-info">
+                  <div class="stream-title">{{ stream.streamId }}</div>
+                  <div class="stream-meta">
+                    <span>🕒 {{ stream.startTime | date:'short' }}</span>
+                    <span>🎞️ {{ stream.totalChunks }} chunks</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+            <!-- Video player -->
+            <div class="video-player" *ngIf="videoUrl">
+              <h3>▶ Playing: {{ selectedStreamId }}</h3>
+              <video
+                controls
+                autoplay
+                playsinline
+                [src]="videoUrl"
+                type="video/webm"
+                class="video"
+              ></video>
+            </div>
+          </div>
+          
       </div>
       
       

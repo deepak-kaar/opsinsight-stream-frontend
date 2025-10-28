@@ -1,0 +1,82 @@
+.recorded-streams-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 16px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 16px;
+  }
+  
+  .loading,
+  .error {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin: 20px 0;
+  }
+  
+  .stream-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  
+  .stream-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f9fafb;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  
+  .stream-card:hover {
+    background: #eef3ff;
+    border-color: #3b82f6;
+  }
+  
+  .stream-card.active {
+    background: #dbeafe;
+    border-color: #2563eb;
+  }
+  
+  .stream-info {
+    flex: 1;
+  }
+  
+  .stream-title {
+    font-weight: 600;
+    font-size: 15px;
+    color: #111827;
+  }
+  
+  .stream-meta {
+    font-size: 13px;
+    color: #6b7280;
+    margin-top: 4px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .video-player {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .video {
+    width: 100%;
+    max-height: 420px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+  }
+  

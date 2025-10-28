@@ -17,6 +17,11 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
   private viewers: Record<string, RTCPeerConnection> = {};
   private isStreaming = false;
 
+  //save stream
+  private mediaRecorder!: MediaRecorder;
+  private recordedChunks: BlobPart[] = [];
+
+
   /**
      * @property {Observable<boolean>} isMobile$ - Stores the application view mode status indicating whether it's accessed on a mobile device or web.
      */
@@ -112,6 +117,24 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
       // Announce broadcaster only after camera is ready
       this.socket.emit('broadcaster');
       console.log('📡 Broadcasting started...');
+
+      // ===== Start recording for saving to server =====
+    this.recordedChunks = [];
+    this.mediaRecorder = new MediaRecorder(this.stream, { mimeType: 'video/webm; codecs=vp8,opus' });
+
+    this.mediaRecorder.ondataavailable = (event) => {
+      if (event.data.size > 0) {
+        this.recordedChunks.push(event.data);
+
+        // Optional: send each chunk immediately to server for live saving
+        event.data.arrayBuffer().then(buffer => {
+          this.socket.emit('recordChunk', buffer);
+        });
+      }
+    };
+
+    this.mediaRecorder.start(1000); // emit data every 1 second
+
     } catch (err:any) {
       console.error('Error accessing camera:', err);
       if (err.name) console.error('Error name:', err.name);
@@ -131,6 +154,10 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
 
     this.isStreaming = false;
     console.log('🛑 Broadcast stopped.');
+
+    if (this.mediaRecorder && this.mediaRecorder.state !== 'inactive') {
+      this.mediaRecorder.stop();
+    }
   }
 
   toggleMobileSidebar() {

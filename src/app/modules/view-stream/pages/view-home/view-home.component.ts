@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
@@ -16,6 +17,15 @@ export class ViewHomeComponent implements OnInit, OnDestroy {
   private pc!: RTCPeerConnection;
   private broadcasterId: string | null = null;
 
+
+  backendUrl = 'http://166.87.229.162:3000'; // ⚠️ Replace with your backend IP/port
+  streams: any[] = [];
+  selectedStreamId: string | null = null;
+  videoUrl: string | null = null;
+  isLoading = false;
+  errorMessage: string | null = null;
+ 
+
   /**
    * @property {Observable<boolean>} isMobile$ - Stores the application view mode status indicating whether it's accessed on a mobile device or web.
    */
@@ -29,10 +39,15 @@ export class ViewHomeComponent implements OnInit, OnDestroy {
    * @property {boolean} mobileSidebarVisible - Determines whether the sidebar is visible on mobile devices.
     */
   mobileSidebarVisible = false;
-  constructor( private responsive: ResponsiveService){}
+
+  recordedVideoUrl: string = '';
+
+  constructor( private responsive: ResponsiveService, private http: HttpClient){}
 
   ngOnInit(): void {
     this.isMobile$ = this.responsive.isMobile$()
+    this.loadStreams();
+
     // ✅ Connect to signaling server
     this.socket = io(
       
@@ -89,6 +104,36 @@ export class ViewHomeComponent implements OnInit, OnDestroy {
   toggleMobileSidebar() {
     this.mobileSidebarVisible = !this.mobileSidebarVisible;
   }
+
+  loadStreams() {
+    this.isLoading = true;
+    this.http.get<any>(`${this.backendUrl}/api/streams`).subscribe({
+      next: (res) => {
+        this.isLoading = false;
+        if (res.success) {
+          this.streams = res.streams;
+        } else {
+          this.errorMessage = 'No streams found.';
+        }
+      },
+      error: (err) => {
+        this.isLoading = false;
+        this.errorMessage = 'Failed to load streams.';
+        console.error(err);
+      }
+    });
+  }
+
+  selectStream(streamId: string) {
+    this.selectedStreamId = streamId;
+    this.videoUrl = `${this.backendUrl}/api/stream/full/${streamId}`;
+    console.log('🎬 Selected stream:', this.videoUrl);
+  }
+
+  
+   
+  
+  
 
   ngOnDestroy(): void {
     // Cleanup
