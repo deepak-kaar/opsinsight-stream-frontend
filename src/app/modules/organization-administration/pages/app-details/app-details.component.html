@@ -1,0 +1,50 @@
+@if((isMobile$|async) === true){
+    <div class="pt-[50px] pl-[20px] pr-[20px] w-auto">
+        <p class="font-normal text-2xl pl-[10px] pb-[20px]">{{appName}}</p>
+        <p-select [options]="appActions" [(ngModel)]="selectedAction" [checkmark]="true" class="w-full md:w-56"  />
+        <!-- <p-selectbutton [options]="appActions" [(ngModel)]="selectedAction" [allowEmpty]="false" size="small" /> -->
+        @switch (selectedAction) {
+        @case ('Operating Organization') {
+        <app-orgs-manager [appId]="appId"></app-orgs-manager>
+        }
+        @case ('Role') {
+        <app-app-roles-manager [appId]="appId"></app-app-roles-manager>
+        }
+        @case ('Role Assignment') {
+        <app-roles-assigner [appId]="appId"></app-roles-assigner>
+        }
+        @case ('Frequency') {
+        <app-frequency-manager [appId]="appId"></app-frequency-manager>
+        }
+        @case("Shift"){
+            <app-shifts-manager [appId]="appId"></app-shifts-manager>
+        }
+        }
+    </div>
+    
+}
+@else {
+<div class="pt-[50px] pl-[20px] pr-[20px] w-full">
+    <p class="font-normal text-2xl pl-[10px] pb-[20px]">{{appName}}</p>
+    <!-- <p-select [options]="appActions" [(ngModel)]="selectedAction" [checkmark]="true" optionLabel="name" [showClear]="true" placeholder="Select a City"  /> -->
+
+    <p-selectbutton [options]="appActions" [(ngModel)]="selectedAction" [allowEmpty]="false" />
+    @switch (selectedAction) {
+    @case ('Operating Organization') {
+    <app-orgs-manager [appId]="appId"></app-orgs-manager>
+    }
+    @case ('Role') {
+    <app-app-roles-manager [appId]="appId"></app-app-roles-manager>
+    }
+    @case ('Role Assignment') {
+    <app-roles-assigner [appId]="appId"></app-roles-assigner>
+    }
+    @case ('Frequency') {
+    <app-frequency-manager [appId]="appId"></app-frequency-manager>
+    }
+    @case("Shift"){
+        <app-shifts-manager [appId]="appId"></app-shifts-manager>
+    }
+    }
+</div>
+}

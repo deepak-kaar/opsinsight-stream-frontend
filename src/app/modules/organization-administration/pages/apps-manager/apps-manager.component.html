@@ -1,0 +1,132 @@
+<div class="pt-4 md:pt-[50px] px-4 md:px-[20px] w-full">
+    <!-- Create Button -->
+    <div class="flex text-right md:justify-end pb-3 md:pb-[10px] gap-5">
+        @if(isOpsAdmin){
+        <p-button class="w-full sm:w-auto" (onClick)="postLogs()">Post Logs</p-button>
+        <p-button class="w-full sm:w-auto" (onClick)="createApp()">Create New Application</p-button>
+        }
+    </div>
+
+    <p-card class="w-full shadow-sm">
+        <div class="card">
+            <div class="flex flex-col md:flex-row md:justify-between gap-3 mb-4">
+                <div class="flex justify-between items-center md:block">
+                    <h2 class="text-lg font-medium m-0">List of Applications</h2>
+                    <div class="block md:hidden">
+                        <p-button [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt)" class="sm:w-auto" />
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row md:items-center md:justify-end gap-2 w-full md:w-auto">
+                    <div class="hidden md:block">
+                        <p-button [outlined]="true" icon="pi pi-filter-slash" (click)="clear(dt)" class="sm:w-auto" />
+                    </div>
+                    <div class="w-full sm:w-auto">
+                        <p-iconField iconPosition="left" class="w-full sm:w-auto">
+                            <p-inputIcon>
+                                <i class="pi pi-search"></i>
+                            </p-inputIcon>
+                            <input pInputText type="text" [(ngModel)]="searchValue" placeholder="Search"
+                                class="w-full" />
+                        </p-iconField>
+                    </div>
+                </div>
+            </div>
+
+            <p-table class="customizePaginator" #dt [value]="apps" selectionMode="single" [(selection)]="selectedApp" dataKey="appId"
+                [rowHover]="true" [rows]="3" [showCurrentPageReport]="(isMobile$|async)==true? false: true" [rowsPerPageOptions]="[3, 5, 10]"
+                [loading]="loading" [paginator]="true" [responsive]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                (onRowSelect)="onAppSelect($event)"
+                [globalFilterFields]="['appName', 'appDescription', 'createdOn', 'appStatus']"
+                styleClass="p-datatable-sm p-datatable-gridlines"
+                [paginatorStyleClass]="'p-paginator-responsive'"
+                
+                [paginatorDropdownAppendTo]="'body'">
+
+                <ng-template #header>
+                    <tr>
+                        <th pSortableColumn="appName" class="text-sm">
+                            <div class="flex justify-between items-center">
+                                App Name
+                                <p-sortIcon field="appName" />
+                            </div>
+                        </th>
+                        <th pSortableColumn="appDescription" class="hidden sm:table-cell">
+                            <div class="flex justify-between items-center">
+                                Description
+                                <p-sortIcon field="appDescription" />
+                            </div>
+                        </th>
+                        <th pSortableColumn="createdOn" class="hidden md:table-cell">
+                            <div class="flex justify-between items-center">
+                                Date
+                                <p-sortIcon field="createdOn" />
+                            </div>
+                        </th>
+                        <th pSortableColumn="appStatus">
+                            <div class="flex justify-between items-center">
+                                Status
+                                <p-sortIcon field="appStatus" />
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-center items-center">
+                                Actions
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+
+                <ng-template #body let-app>
+                    <tr [pSelectableRow]="app">
+                        <td>
+                            <span class="font-medium">{{ app.appName }}</span>
+                            <div class="block sm:hidden text-xs text-gray-500 mt-1 pr-2">
+                                {{ app.appDescription }}
+                            </div>
+                            <div class="block md:hidden text-xs text-gray-500 mt-1">
+                                {{ app.createdOn | date: 'MM/dd/yyyy' }}
+                            </div>
+                        </td>
+                        <td class="hidden sm:table-cell">
+                            {{ app.appDescription }}
+                        </td>
+                        <td class="hidden md:table-cell">
+                            {{ app.createdOn | date: 'MM/dd/yyyy' }}
+                        </td>
+                        <td>
+                            <p-tag [value]="getStatus(app.appStatus)" [severity]="getSeverity(app.appStatus)" />
+                        </td>
+                        <td>
+                            <div class="flex justify-center gap-2">
+                                <p-button icon="pi pi-pencil" [rounded]="true" [outlined]="true" size="small"
+                                    (click)="editApp(app)" />
+                                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                                    size="small" (click)="deleteApp($event,app.appId)" />
+                            </div>
+                        </td>
+                    </tr>
+                </ng-template>
+
+                <ng-template #emptymessage>
+                    <tr>
+                        <td colspan="5" class="text-center py-4">No applications found.</td>
+                    </tr>
+                </ng-template>
+
+                <!-- Custom paginator template -->
+                <ng-template pTemplate="paginatorleft">
+                    <div class="hidden sm:block text-sm text-gray-600">
+                        <!-- Showing {{dt.first + 1}} to {{dt.first + dt.rows > dt.totalRecords ? dt.totalRecords : dt.first + dt.rows}} of {{dt.totalRecords}} entries -->
+                    </div>
+                </ng-template>
+            </p-table>
+
+        </div>
+    </p-card>
+</div>
+
+<p-confirmdialog />
+<p-toast></p-toast>
+

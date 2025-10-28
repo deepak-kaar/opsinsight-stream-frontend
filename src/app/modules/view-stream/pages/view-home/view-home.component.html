@@ -1,0 +1,38 @@
+@if((isMobile$ |async)==false){
+    <div>
+        <app-sidebar></app-sidebar>
+    </div>
+    }
+    <div class="fixed inset-0 z-50 md:hidden transition-transform duration-300 ease-in-out" [ngClass]="{
+        'translate-x-0': mobileSidebarVisible,
+        '-translate-x-full': !mobileSidebarVisible
+      }">
+        <div class="absolute w-[300px] h-full bg-white shadow-lg z-50">
+            <app-sidebar></app-sidebar>
+        </div>
+    
+    
+        <div class="fixed inset-0 z-40 md:hidden" (click)="toggleMobileSidebar()"></div>
+    </div>
+<div class="pl-[0] md:pl-[300px] h-screen overflow-y-auto z-30">
+    <div class="box-shadow w-full flex justify-between md:justify-end h-[60px]">
+        <div class=" p-2 flex justify-center md:hidden">
+            <button class=" block  text-3xl" (click)="toggleMobileSidebar()" aria-label="Toggle sidebar"> &#9776;
+            </button>
+        </div>
+        <div class="p-2 flex">
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input type="text" class="global-search" pInputText placeholder="Search" />
+            </p-iconfield>
+        </div>
+    </div>
+    
+    <div class="flex flex-col items-center gap-3 p-4">
+        <h2 class="text-lg font-semibold">Viewer</h2>
+      
+        <video #remoteVideo autoplay playsinline controls></video>
+      </div>
+      
+      
+    </div>

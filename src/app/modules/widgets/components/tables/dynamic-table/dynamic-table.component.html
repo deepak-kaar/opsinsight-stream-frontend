@@ -1,0 +1,22 @@
+<p-table [columns]="dataSets.attributes" [value]="dataSets.products" [tableStyle]="{
+    height: '100%',
+    width: '100%',
+    'background-color': '#FFFFFF',
+    'border-radius': '15px',
+    margin: '1px'
+  }">
+    <ng-template pTemplate="header" let-columns>
+        <tr>
+            <th style="border: 1px solid rgb(182,207,230);" *ngFor="let col of columns">
+                {{ col.attributeName }}
+            </th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr>
+            <td style="border: 1px solid rgb(182,207,230);" *ngFor="let col of columns">
+                {{ rowData[col.attributeName] }}
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

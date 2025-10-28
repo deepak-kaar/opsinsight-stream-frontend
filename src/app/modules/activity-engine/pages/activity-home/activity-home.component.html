@@ -1,0 +1,30 @@
+<div>
+    <app-sidebar></app-sidebar>
+</div>
+<div class="pl-[300px] h-screen overflow-y-auto">
+    <div class="box-shadow w-full flex justify-between md:justify-end h-[60px]">
+        <div class=" p-2 flex justify-center md:hidden">
+        </div>
+        <div class="p-2 flex">
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input type="text" class="global-search" pInputText placeholder="Search" />
+            </p-iconfield>
+        </div>
+    </div>
+    <div class="pt-[50px] px-[20px]">
+        <app-filter></app-filter>
+        <div class="pt-[30px] flex flex-wrap gap-[20px] cursor-pointer">
+            @for(card of cardList;track card;let idx = $index){
+            <p-card [styleClass]="getCardClass(idx)" (click)="change(idx)">
+                <div class="flex gap-[16px] h-full items-center  font-bold">
+                    <div [innerHTML]="sanitizer.bypassSecurityTrustHtml(card.svg)"></div>
+                    <span>{{card.name}}</span>
+                </div>
+            </p-card>
+            }
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<p-toast></p-toast>

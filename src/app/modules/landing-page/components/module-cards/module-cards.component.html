@@ -1,0 +1,123 @@
+<div class="bg-[#FFFFFF33] md:min-h-[400px] mt-[30px] md:m-[30px] backdrop-blur-[40px] rounded-[12px]">
+    <div class="p-4 md:p-10 h-full flex md:flex-wrap max-sm:overflow-x-auto [scrollbar-width:none] gap-[35px] items-center md:justify-center">
+        <div class="bg-white w-[180px] md:w-[310px] h-[200px] md:h-[320px] rounded-[12px] flex-shrink-0 active-card cursor-pointer"
+            routerLink="/orgAdmin/opsAdmin">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <!-- <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M24 46.5C12.886 44.03 4 33.544 4 22.5V10.5L24 2.5L44 10.5V22.5C44 33.548 35.114 44.03 24 46.5ZM8 12.5V22.5C8.11429 27.1243 9.74072 31.5837 12.6304 35.1957C15.52 38.8078 19.5136 41.3734 24 42.5C28.4864 41.3734 32.48 38.8078 35.3696 35.1957C38.2593 31.5837 39.8857 27.1243 40 22.5V12.5L24 6.5L8 12.5Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M24 22.5C26.7614 22.5 29 20.2614 29 17.5C29 14.7386 26.7614 12.5 24 12.5C21.2386 12.5 19 14.7386 19 17.5C19 20.2614 21.2386 22.5 24 22.5Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M14 30.5C14.9855 32.2967 16.4308 33.7991 18.188 34.8534C19.9451 35.9077 21.951 36.476 24 36.5C26.049 36.476 28.0549 35.9077 29.812 34.8534C31.5692 33.7991 33.0145 32.2967 34 30.5C33.95 26.708 27.316 24.5 24 24.5C20.666 24.5 14.05 26.708 14 30.5Z"
+                            fill="var(--p-primary-color)" />
+                    </svg> -->
+                    <svg [attr.width]="(isMobile$ | async) ? 48 : 150" [attr.height]="(isMobile$ | async) ? 49 : 151"
+                        viewBox="0 0 150 151" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M75 143.77C40.2687 136.051 12.5 103.282 12.5 68.7695V31.2695L75 6.26953L137.5 31.2695V68.7695C137.5 103.295 109.731 136.051 75 143.77ZM25 37.5195V68.7695C25.3572 83.2203 30.4398 97.156 39.4699 108.444C48.5 119.731 60.9801 127.749 75 131.27C89.0199 127.749 101.5 119.731 110.53 108.444C119.56 97.156 124.643 83.2203 125 68.7695V37.5195L75 18.7695L25 37.5195Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M75 68.7695C83.6294 68.7695 90.625 61.774 90.625 53.1445C90.625 44.5151 83.6294 37.5195 75 37.5195C66.3706 37.5195 59.375 44.5151 59.375 53.1445C59.375 61.774 66.3706 68.7695 75 68.7695Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M43.75 93.7695C46.8295 99.3841 51.3462 104.079 56.8373 107.374C62.3285 110.669 68.5967 112.444 75 112.52C81.4033 112.444 87.6715 110.669 93.1626 107.374C98.6538 104.079 103.17 99.3841 106.25 93.7695C106.094 81.9195 85.3625 75.0195 75 75.0195C64.5812 75.0195 43.9062 81.9195 43.75 93.7695Z"
+                            fill="var(--p-primary-color)" />
+                    </svg>
+
+                </div>
+                <div class="w-[100px] md:w-[220px]">
+                    <p class="text-center text-[#526179] md:text-[24px] font-[350]">OpsInsight Administration</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white w-[180px] md:w-[310px] h-[200px] md:h-[320px] rounded-[12px] flex-shrink-0 active-card cursor-pointer"
+            routerLink="/orgAdmin/appAdmin">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <svg [attr.width]="(isMobile$ | async) ? 48 : 150" [attr.height]="(isMobile$ | async) ? 49 : 151"
+                        viewBox="0 0 150 151" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M75 143.77C40.2687 136.051 12.5 103.282 12.5 68.7695V31.2695L75 6.26953L137.5 31.2695V68.7695C137.5 103.295 109.731 136.051 75 143.77ZM25 37.5195V68.7695C25.3572 83.2203 30.4398 97.156 39.4699 108.444C48.5 119.731 60.9801 127.749 75 131.27C89.0199 127.749 101.5 119.731 110.53 108.444C119.56 97.156 124.643 83.2203 125 68.7695V37.5195L75 18.7695L25 37.5195Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M75 68.7695C83.6294 68.7695 90.625 61.774 90.625 53.1445C90.625 44.5151 83.6294 37.5195 75 37.5195C66.3706 37.5195 59.375 44.5151 59.375 53.1445C59.375 61.774 66.3706 68.7695 75 68.7695Z"
+                            fill="var(--p-primary-color)" />
+                        <path
+                            d="M43.75 93.7695C46.8295 99.3841 51.3462 104.079 56.8373 107.374C62.3285 110.669 68.5967 112.444 75 112.52C81.4033 112.444 87.6715 110.669 93.1626 107.374C98.6538 104.079 103.17 99.3841 106.25 93.7695C106.094 81.9195 85.3625 75.0195 75 75.0195C64.5812 75.0195 43.9062 81.9195 43.75 93.7695Z"
+                            fill="var(--p-primary-color)" />
+                    </svg>
+                </div>
+                <div class="w-[100px] md:w-[220px]">
+                    <p class="text-center text-[#526179] md:text-[24px] font-[350]">App Administration</p>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="bg-white w-[220px] h-[160px] rounded-[12px] flex-shrink-0 active-card cursor-pointer"
+            routerLink="/datapointAdmin">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M11.25 5C9.45979 5 7.7429 5.71116 6.47703 6.97703C5.21116 8.2429 4.5 9.95979 4.5 11.75V37.25C4.5 39.0402 5.21116 40.7571 6.47703 42.023C7.7429 43.2888 9.45979 44 11.25 44H36.75C38.5402 44 40.2571 43.2888 41.523 42.023C42.7888 40.7571 43.5 39.0402 43.5 37.25V11.75C43.5 9.95979 42.7888 8.2429 41.523 6.97703C40.2571 5.71116 38.5402 5 36.75 5H11.25ZM7.5 11.75C7.5 10.7554 7.89509 9.80161 8.59835 9.09835C9.30161 8.39509 10.2554 8 11.25 8H36.75C37.7446 8 38.6984 8.39509 39.4016 9.09835C40.1049 9.80161 40.5 10.7554 40.5 11.75V37.25C40.5 38.2446 40.1049 39.1984 39.4016 39.9016C38.6984 40.6049 37.7446 41 36.75 41H11.25C10.2554 41 9.30161 40.6049 8.59835 39.9016C7.89509 39.1984 7.5 38.2446 7.5 37.25V11.75ZM34.5 15.5C34.5 15.1022 34.342 14.7206 34.0607 14.4393C33.7794 14.158 33.3978 14 33 14C32.6022 14 32.2206 14.158 31.9393 14.4393C31.658 14.7206 31.5 15.1022 31.5 15.5V33.5C31.5 33.8978 31.658 34.2794 31.9393 34.5607C32.2206 34.842 32.6022 35 33 35C33.3978 35 33.7794 34.842 34.0607 34.5607C34.342 34.2794 34.5 33.8978 34.5 33.5V15.5ZM24 24.5C24.3978 24.5 24.7794 24.658 25.0607 24.9393C25.342 25.2206 25.5 25.6022 25.5 26V33.5C25.5 33.8978 25.342 34.2794 25.0607 34.5607C24.7794 34.842 24.3978 35 24 35C23.6022 35 23.2206 34.842 22.9393 34.5607C22.658 34.2794 22.5 33.8978 22.5 33.5V26C22.5 25.6022 22.658 25.2206 22.9393 24.9393C23.2206 24.658 23.6022 24.5 24 24.5ZM16.5 20C16.5 19.6022 16.342 19.2206 16.0607 18.9393C15.7794 18.658 15.3978 18.5 15 18.5C14.6022 18.5 14.2206 18.658 13.9393 18.9393C13.658 19.2206 13.5 19.6022 13.5 20V33.5C13.5 33.8978 13.658 34.2794 13.9393 34.5607C14.2206 34.842 14.6022 35 15 35C15.3978 35 15.7794 34.842 16.0607 34.5607C16.342 34.2794 16.5 33.8978 16.5 33.5V20Z"
+                            fill="var(--p-primary-color)" stroke="var(--p-primary-color)" />
+                    </svg>
+                </div>
+                <div class="w-[111px]">
+                    <p class="text-center text-black">Datapoint Administration</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white w-[220px] h-[160px] rounded-[12px] flex-shrink-0 active-card cursor-pointer"
+            routerLink="/pageAdmin/pageManager">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M39 6.5H9C7.34315 6.5 6 7.84315 6 9.5V39.5C6 41.1569 7.34315 42.5 9 42.5H39C40.6569 42.5 42 41.1569 42 39.5V9.5C42 7.84315 40.6569 6.5 39 6.5Z"
+                            stroke="var(--p-primary-color)" stroke-width="3.5" stroke-linejoin="round" />
+                        <path d="M6 17.5H42M17 42.5V17.5" stroke="var(--p-primary-color)" stroke-width="3.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </div>
+                <div class="w-[111px]">
+                    <p class="text-center text-black">Page Administration</p>
+                </div>
+            </div>
+        </div>
+        <div class="bg-white w-[220px] h-[160px] rounded-[12px] flex-shrink-0 active-card cursor-pointer"
+            routerLink="/calculationEngine">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24 10.5V38.5M10 24.5H38" stroke="var(--p-primary-color)" stroke-width="3.5"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M24 46.5C36.7025 46.5 47 36.2025 47 23.5C47 10.7975 36.7025 0.5 24 0.5C11.2975 0.5 1 10.7975 1 23.5C1 36.2025 11.2975 46.5 24 46.5Z"
+                            stroke="var(--p-primary-color)" stroke-width="3.5" />
+                    </svg>
+                </div>
+                <div class="w-[111px]">
+                    <p class="text-center text-black">Calculation Engine</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white w-[220px] h-[160px] rounded-[12px] flex-shrink-0">
+            <div class="flex flex-col justify-center items-center h-full">
+                <div>
+                    <svg width="48" height="49" viewBox="0 0 48 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 38.5H28M14 10.5H34M10 18.5H38M6 26.5H42" stroke="var(--p-primary-color)"
+                            stroke-width="3.5" stroke-linecap="round" />
+                    </svg>
+                </div>
+                <div class="w-[111px]">
+                    <p class="text-center text-black">Event Administration</p>
+                </div>
+            </div>
+        </div> -->
+    </div>
+</div>

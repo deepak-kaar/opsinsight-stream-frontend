@@ -1,0 +1,110 @@
+<div class="w-full">
+    <div class="pt-[10px]">
+        <p-card class="w-full">
+            <p-table #dt [value]="mappings" dataKey="id" [rowHover]="true" [rows]="10" [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10, 20, 30]" [paginator]="true"
+                currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0"
+                [globalFilterFields]="['flagName', 'flagDesc', 'flagSeverity']">
+                <ng-template pTemplate="caption">
+                    <div class="flex justify-between">
+                        <p-button [outlined]="true" icon="pi pi-filter-slash" label="Clear" (onClick)="clear(dt)" />
+                        <div class="flex gap-[10px] items-center">
+                            <p-iconField iconPosition="left">
+                                <p-inputIcon>
+                                    <i class="pi pi-search"></i>
+                                </p-inputIcon>
+                                <input pInputText type="text" (keyup)="applyFilterGlobal($event, 'contains')"
+                                    [(ngModel)]="searchValue" placeholder="Keyboard Search" />
+                            </p-iconField>
+                            <p-button label="Create Mapping"
+                                [style]="{'border-radius':'12px','height':'37px','border':'none'}"
+                                (onClick)="createAttributeTemplate()" />
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pSortableColumn="flagName" style="min-width: 14rem" class="border-round-left-2xl text-left">
+                            <div class="flex justify-between items-center">
+                                Name
+                                <p-sortIcon field="flagName" />
+                                <p-columnFilter type="text" field="flagName" display="menu" class="ml-auto" />
+                            </div>
+                        </th>
+                        <th pSortableColumn="flagDesc" style="min-width: 14rem">
+                            <div class="flex justify-between items-center">
+                                Description
+                                <p-sortIcon field="flagDesc" />
+                                <p-columnFilter type="text" field="flagDesc" display="menu" class="ml-auto" />
+                            </div>
+                        </th>
+                        <th>
+                            <div class="flex justify-between items-center">
+                                Execution
+                            </div>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-flag>
+                    <tr class="p-selectable-row">
+                        <td class="text-left cursor-pointer" (click)="openMapping(flag)">
+                            <span class="ml-1 vertical-align-middle desc">{{ flag.calculationName }}</span>
+                        </td>
+                        <td class="text-left cursor-pointer" (click)="openMapping(flag)">
+                            {{ flag.calculationDesc }}
+                        </td>
+                        <td class="text-left cursor-pointer">
+                            <p-button icon="pi pi-play" (onClick)="confirm(flag)" [text]="true"></p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="8">No calculation mappings found.</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-card>
+    </div>
+</div>
+
+<p-toast [breakpoints]="breakPointForToastComponent"></p-toast>
+<p-dialog header="Edit Profile" [modal]="true" [(visible)]="visible">
+    <ng-template #headless>
+        <div class="flex flex-col items-center p-8 bg-surface-0 dark:bg-surface-900 rounded">
+            <div
+                class="rounded-full bg-primary text-primary-contrast inline-flex justify-center items-center h-24 w-24 -mt-20">
+                <i class="pi pi-play-circle !text-5xl"></i>
+            </div>
+            <div class="pt-3">
+                <p class="text-center">Please Pick Date & Time</p>
+                <p-datepicker inputId="calendar-12h" [(ngModel)]="testDate" [showTime]="true" hourFormat="12" />
+            </div>
+            @if(showResult){
+            <div class="pt-3">
+                <p-table [value]="resultData" [tableStyle]="{ 'min-width': '30rem' }">
+                    <ng-template #header>
+                        <tr>
+                            <th>Date & Time</th>
+                            <th>Output Variable Name</th>
+                            <th>Value</th>
+                        </tr>
+                    </ng-template>
+                    <ng-template #body let-product>
+                        <tr>
+                            <td>{{this.testDate |date: 'short'}}</td>
+                            <td>{{product.outputAttr}}</td>
+                            <td>{{ product.result }}</td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+            }
+            <div class="flex items-center gap-2 mt-6">
+                <p-button label="Run" styleClass="w-32"></p-button>
+                <p-button label="Test" (onClick)="run()" styleClass="w-32"></p-button>
+                <p-button label="Close" [outlined]="true" (onClick)="closeRun()" styleClass="w-32"></p-button>
+            </div>
+        </div>
+    </ng-template>
+</p-dialog>

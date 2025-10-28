@@ -1,0 +1,154 @@
+<div class="flex flex-col gap-3 p-2 md:p-4">
+    <form [formGroup]="appForm" class="flex flex-col gap-3">
+        <!-- Application Name and Description - Stacks vertically on mobile -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex flex-col gap-2">
+                <label for="appname">Application Name<span class="text-[var(--p-red-500)]"> *</span></label>
+                <input pInputText id="appname" formControlName="appName" aria-describedby="username-help" class="w-full" />
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="appdesc">Application Description <span class="text-[var(--p-red-500)]"> *</span></label>
+                <input pInputText formControlName="appDescription" id="appdesc" aria-describedby="username-help" class="w-full" />
+            </div>
+        </div>
+
+        <!-- Admin Role and Classification - Stacks vertically on mobile -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex flex-col gap-2">
+                <label for="approle">Select Admin Role</label>
+                <p-select formControlName="appAdminRole" [options]="adminRoles"
+                    optionLabel="roleName" optionValue="roleId" placeholder="Select a Role" class="w-full" />
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="appclass">Application Classification</label>
+                <p-select formControlName="appClassification" [options]="classifications"
+                    placeholder="Select a Classification" class="w-full" />
+            </div>
+        </div>
+
+        <!-- Application Owner and Contact - Stacks vertically on mobile -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="flex flex-col gap-2">
+                <label for="appowner">Application Owner</label>
+                <input formControlName="appOwner" pInputText id="appowner" aria-describedby="username-help" class="w-full" />
+            </div>
+            <div class="flex flex-col gap-2">
+                <label for="appcontact">Application Contact</label>
+                <input formControlName="activeStatus" pInputText id="activeStatus" aria-describedby="username-help" class="w-full" />
+            </div>
+        </div>
+
+        <!-- Active Status (conditional) -->
+        @if(mode === 'edit'){
+        <div class="grid grid-cols-1 gap-3">
+            <div class="flex flex-col gap-2">
+                <label for="appowner">Active Status</label>
+                <p-select formControlName="appStatus" optionLabel="name"
+                    optionValue="value" [options]="activeStatus" placeholder="Select Active status"
+                    class="w-full" />
+            </div>
+        </div>
+        }
+    </form>
+
+    <!-- File Upload Section - Responsive design -->
+    <div class="grid grid-cols-1 gap-3">
+        <p-fileupload name="myfile[]" url="https://www.primefaces.org/cdn/api/upload.php" [multiple]="false"
+            accept="" maxFileSize="10000000" (onUpload)="onTemplatedUpload(fileUpload)"
+            (onSelect)="onSelectedFiles($event)" styleClass="w-full">
+            <ng-template #header let-files let-chooseCallback="chooseCallback" let-clearCallback="clearCallback"
+                let-uploadCallback="uploadCallback">
+                <div class="flex flex-wrap justify-between items-center flex-1 gap-2">
+                    <div class="flex gap-1 flex-wrap">
+                        <p-button (onClick)="choose($event, chooseCallback)" icon="pi pi-images" [rounded]="true"
+                            [outlined]="true" [disabled]="isExistingImage" />
+                        <p-button (onClick)="uploadEvent(uploadCallback)" icon="pi pi-cloud-upload" [rounded]="true"
+                            [outlined]="true" severity="success" [disabled]="!files || files.length === 0" />
+                            
+                        <p-button (onClick)="clearImage()" icon="pi pi-times" [rounded]="true" [outlined]="true"
+                            severity="danger" [disabled]="isMobilePlatform ? !fileSelectedFromMobile : (!files || files.length === 0)" />
+                            
+                    </div>
+                    <p-progressbar [value]="totalSizePercent" [showValue]="false" class="w-full h-1">
+                        <span class="whitespace-nowrap text-xs">{{ totalSize }}B / 1Mb</span>
+                    </p-progressbar>
+                </div>
+            </ng-template>
+            <ng-template #content let-files let-uploadedFiles="uploadedFiles"
+                let-removeFileCallback="removeFileCallback" let-removeUploadedFileCallback="removeUploadedFileCallback">
+                <div class="flex flex-col gap-4 pt-3">
+                    <!-- Pending Files Section -->
+                    <div *ngIf="files?.length > 0">
+                        <h5 class="text-center">Pending</h5>
+                        <div class="flex justify-center flex-wrap gap-3">
+                            <div *ngFor="let file of files; let i = index"
+                                class="p-3 sm:p-4 rounded-border flex flex-col border border-surface items-center gap-2 w-full sm:w-auto">
+                                <div>
+                                    <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="80" 
+                                        height="40" class="max-w-full" />
+                                </div>
+                                <span class="font-semibold text-ellipsis max-w-36 text-sm whitespace-nowrap overflow-hidden">{{
+                                    file.name }}</span>
+                                <div class="text-sm">{{ formatSize(file.size) }}</div>
+                                <p-badge value="Pending" severity="warn" />
+                                <p-button icon="pi pi-times"
+                                    (click)="onRemoveTemplatingFile($event, file, removeFileCallback, index)"
+                                    [outlined]="true" [rounded]="true" severity="danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Completed Files Section -->
+                    <div *ngIf="uploadedFiles?.length > 0">
+                        <h5 class="text-center">Completed</h5>
+                        <div class="flex justify-center flex-wrap gap-3">
+                            <div *ngFor="let file of uploadedFiles; let i = index"
+                                class="p-3 sm:p-4 flex flex-col border border-surface items-center gap-2 w-full sm:w-auto">
+                                <div>
+                                    <img role="presentation" [alt]="file.name" [src]="file.objectURL" width="80"
+                                        height="40" class="max-w-full" />
+                                </div>
+                                <span class="font-semibold text-ellipsis max-w-36 text-sm whitespace-nowrap overflow-hidden">{{
+                                    file.name }}</span>
+                                <div class="text-sm">{{ formatSize(file.size) }}</div>
+                                <p-badge value="Completed" class="mt-2" severity="success" />
+                                <p-button icon="pi pi-times" (onClick)="removeUploadedFileCallback(index)"
+                                    [outlined]="true" [rounded]="true" severity="danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Existing Image Section -->
+                    <div *ngIf="isExistingImage">
+                        <h5 class="text-center">Completed</h5>
+                        <div class="flex flex-wrap p-0 justify-center gap-3">
+                            <div class="p-3 sm:p-4 flex flex-col border border-surface items-center gap-2 w-full sm:w-auto">
+                                <div class="flex justify-center">
+                                    <img role="presentation" [src]="this.uploadedFile" class="max-w-full" width="160" height="160" />
+                                </div>
+                                <p-badge value="Completed" class="mt-2" severity="success" />
+                                <p-button icon="pi pi-times" (onClick)="clearExisting()" [outlined]="true"
+                                    [rounded]="true" severity="danger" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template #file></ng-template>
+            @if(!isExistingImage){
+            <ng-template #empty>
+                <div class="flex items-center justify-center flex-col p-4">
+                    <i class="pi pi-cloud-upload border-2 rounded-full p-4 sm:p-6 text-2xl sm:text-4xl text-muted-color"></i>
+                    <p class="mt-3 mb-0 text-center text-sm sm:text-base">Drag and drop files to here to upload.</p>
+                </div>
+            </ng-template>
+            }
+        </p-fileupload>
+    </div>
+
+    <!-- Action Buttons - Stack on mobile -->
+    <div class="flex flex-col sm:flex-row justify-center gap-2 sm:gap-3 mt-2">
+        <p-button styleClass="w-full sm:w-44" severity="danger" outlined="true" label="Cancel"></p-button>
+        <p-button styleClass="w-full sm:w-44" label="Save" (onClick)="createApp()"></p-button>
+    </div>
+</div>

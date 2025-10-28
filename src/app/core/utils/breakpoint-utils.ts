@@ -1,0 +1,1 @@
+export var breakPointForToastComponent : { [key: string]: any; } = { '767px': { width: '100%', right: '0', left: '0' } };

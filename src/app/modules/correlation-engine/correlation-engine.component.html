@@ -1,0 +1,17 @@
+<div>
+    <app-sidebar></app-sidebar>
+</div>
+<div class="pl-[300px] h-screen overflow-y-auto">
+    <div class="box-shadow w-full flex justify-between md:justify-end h-[60px]">
+        <div class=" p-2 flex justify-center md:hidden">
+        </div>
+        <div class="p-2 flex">
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input type="text" class="global-search" pInputText placeholder="Search" />
+            </p-iconfield>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<p-toast></p-toast>
