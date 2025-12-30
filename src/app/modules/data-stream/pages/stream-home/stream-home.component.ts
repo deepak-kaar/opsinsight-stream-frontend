@@ -45,7 +45,8 @@ export class StreamHomeComponent implements OnInit,OnDestroy {
     this.socket = io(
       
       // 'http://166.87.229.162:3000',
-      'https://socket-server-1-lb6b.onrender.com',
+      // 'https://socket-server-1-lb6b.onrender.com',
+      'https://opsinsight-mock-server-1.onrender.com',
     
     {
       transports: ['websocket']

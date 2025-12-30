@@ -30,7 +30,8 @@ export class ScanHomeComponent implements OnInit {
       isScanning = false;
       errorMessage: string | null = null;
       isSaving = false;
-      private baseUrl = 'https://socket-server-1-lb6b.onrender.com/api';
+      // private baseUrl = 'https://socket-server-1-lb6b.onrender.com/api';
+      private baseUrl = 'https://opsinsight-mock-server-1.onrender.com/scanning';
 
       uploadedDocuments: any[] = [];
       isLoadingDocs = false;
