@@ -35,9 +35,9 @@
             <div class="p-[10px]">
                 <textarea [(ngModel)]="recognizedText" rows="5" cols="40"></textarea>
                 <div class="mt-[10px] flex gap-[10px]">
-                    <button (click)="startSpeech()">Start</button>
-                    <button (click)="stopSpeech()">Stop</button>
-                    <button (click)="clearTextArea()">Clear</button>
+                    <button class="bg-green-500" (click)="startSpeech()">Start</button>
+                    <button class="bg-red-500" (click)="stopSpeech()">Stop</button>
+                    <button class="bg-sky-500" (click)="clearTextArea()">Clear</button>
 
                   </div>
             </div>
