@@ -74,6 +74,8 @@ const routes: Routes = [
   },
   { path: 'dataStream', loadChildren: () => import('./modules/data-stream/data-stream.module').then(m => m.DataStreamModule) },
   { path: 'viewStream', loadChildren: () => import('./modules/view-stream/view-stream.module').then(m => m.ViewStreamModule) },
+  { path: 'scanDocument', loadChildren: () => import('./modules/scan-document/scan-document.module').then(m => m.ScanDocumentModule) },
+  { path: 'speechToText', loadChildren: () => import('./modules/speech-text/speech-text.module').then(m => m.SpeechTextModule) },
 ];
 
 @NgModule({

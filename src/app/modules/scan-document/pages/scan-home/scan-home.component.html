@@ -1,0 +1,109 @@
+
+@if((isMobile$ |async)==false){
+    <div>
+        <app-sidebar></app-sidebar>
+    </div>
+    }
+<div class="fixed inset-0 z-50 md:hidden transition-transform duration-300 ease-in-out" [ngClass]="{
+    'translate-x-0': mobileSidebarVisible,
+    '-translate-x-full': !mobileSidebarVisible
+  }">
+    <div class="absolute w-[300px] h-full bg-white shadow-lg z-50">
+        <app-sidebar></app-sidebar>
+    </div>
+
+
+    <div class="fixed inset-0 z-40 md:hidden" (click)="toggleMobileSidebar()"></div>
+</div>
+<div class="pl-[0] md:pl-[300px] h-screen overflow-y-auto z-30">
+    <div class="box-shadow w-full flex justify-between md:justify-end h-[60px]">
+        <div class=" p-2 flex justify-center md:hidden">
+            <button class=" block  text-3xl" (click)="toggleMobileSidebar()" aria-label="Toggle sidebar"> &#9776;
+            </button>
+        </div>
+        <div class="p-2 flex">
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input type="text" class="global-search" pInputText placeholder="Search" />
+            </p-iconfield>
+        </div>
+        
+    </div>
+    
+    <div>
+        <div class="scanner-container">
+            <h2>Document Scanner</h2>
+          
+            <div class="button-group">
+              <button class="scan-btn" (click)="startDocumentScan()" [disabled]="isScanning">
+                {{ isScanning ? 'Scanning...' : 'Scan Document' }}
+              </button>
+          
+              <button class="add-btn" (click)="addMoreScans()" [disabled]="isScanning || scannedImages.length === 0">
+                Add More
+              </button>
+          
+              <button class="clear-btn" (click)="clearAll()" [disabled]="scannedImages.length === 0">
+                Clear All
+              </button>
+          
+              <button class="save-btn" (click)="saveScannedFile()" [disabled]="scannedImages.length === 0 || isSaving">
+                {{ isSaving ? 'Saving...' : 'Save as PDF' }}
+              </button>
+            </div>
+          
+            <div *ngIf="isScanning" class="loading">Opening scanner...</div>
+            <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+          
+            <div *ngIf="scannedImages.length > 0" class="images-container">
+              <h3>Scanned Images</h3>
+          
+              <div class="image-grid">
+                <div class="image-card" *ngFor="let img of scannedImages; let i = index">
+                  <img [src]="img" alt="Scanned Document" />
+                  <button class="delete-btn" (click)="deleteImage(i)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+    <!-- ========================= -->
+<!-- Uploaded Documents List -->
+<!-- ========================= -->
+<div class="documents-container" *ngIf="uploadedDocuments.length > 0">
+    <h3>Uploaded Documents</h3>
+  
+    <table class="documents-table">
+      <thead>
+        <tr>
+          <th>Document Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let doc of uploadedDocuments">
+          <td>{{ doc.filename || doc.name }}</td>
+          <td>
+            <button class="view-btn" (click)="viewDocument(doc._id)">View</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+  <!-- No documents found -->
+  <div *ngIf="!uploadedDocuments.length && !isLoadingDocs" class="no-docs">
+    No uploaded documents found.
+  </div>
+  
+  <div *ngIf="isLoadingDocs" class="loading">
+    Loading documents...
+  </div>
+  
+                    
+          
+
+    </div>
+  
+      
+    </div>

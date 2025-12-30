@@ -274,6 +274,41 @@
             <span>View Stream</span>
           </div>
         </div>
+
+        <div class="flex items-center gap-[10px] cursor-pointer" routerLink="/scanDocument"
+        routerLinkActive="active-link">
+        <div class="p-2">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none" />
+  
+            <path d="M9 8 L12 5 L15 8" stroke="white" stroke-width="1.5" fill="none" />
+            <path d="M15 16 L12 19 L9 16" stroke="white" stroke-width="1.5" fill="none" />
+  
+            <path d="M12 5 A7 7 0 0 1 19 12" stroke="white" stroke-width="1.5" fill="none" />
+            <path d="M5 12 A7 7 0 0 1 12 19" stroke="white" stroke-width="1.5" fill="none" />
+          </svg>
+        </div>
+        <div [ngClass]="{ invisible: collapsed, visible: !collapsed }">
+          <span>Scan Document</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-[10px] cursor-pointer" routerLink="/speechToText"
+      routerLinkActive="active-link">
+      <div class="p-2">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="12" cy="12" r="10" stroke="white" stroke-width="2" fill="none" />
+
+          <path d="M9 8 L12 5 L15 8" stroke="white" stroke-width="1.5" fill="none" />
+          <path d="M15 16 L12 19 L9 16" stroke="white" stroke-width="1.5" fill="none" />
+
+          <path d="M12 5 A7 7 0 0 1 19 12" stroke="white" stroke-width="1.5" fill="none" />
+          <path d="M5 12 A7 7 0 0 1 12 19" stroke="white" stroke-width="1.5" fill="none" />
+        </svg>
+      </div>
+      <div [ngClass]="{ invisible: collapsed, visible: !collapsed }">
+        <span>Speech To Text</span>
+      </div>
+    </div>
         
 
     <div class="flex items-center gap-[10px] cursor-pointer" (click)="op.toggle($event)">

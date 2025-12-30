@@ -34,7 +34,7 @@
         <video #remoteVideo autoplay playsinline controls></video>
 
         <div class="recorded-streams-container">
-            <h2>🎥 Recorded Streams</h2>
+            <h2>Recorded Streams</h2>
           
             <!-- Loading spinner -->
             <div *ngIf="isLoading" class="loading">Loading streams...</div>
@@ -53,8 +53,8 @@
                 <div class="stream-info">
                   <div class="stream-title">{{ stream.streamId }}</div>
                   <div class="stream-meta">
-                    <span>🕒 {{ stream.startTime | date:'short' }}</span>
-                    <span>🎞️ {{ stream.totalChunks }} chunks</span>
+                    <span> {{ stream.startTime | date:'short' }}</span>
+                    <span> {{ stream.totalChunks }} chunks</span>
                   </div>
                 </div>
               </div>
@@ -62,7 +62,7 @@
           
             <!-- Video player -->
             <div class="video-player" *ngIf="videoUrl">
-              <h3>▶ Playing: {{ selectedStreamId }}</h3>
+              <h3>Playing: {{ selectedStreamId }}</h3>
               <video
                 controls
                 autoplay

@@ -1,0 +1,84 @@
+.card {
+    max-width: 720px;
+    margin: 0 auto;
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 14px;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.06);
+  }
+  
+  /* Heading */
+  h3 {
+    margin: 0 0 12px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0b2545;
+  }
+  
+  /* Textarea */
+  textarea {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    padding: 10px 12px;
+    box-sizing: border-box;
+    font-size: 15px;
+    line-height: 1.4;
+    border: 1px solid #e6e9ef;
+    border-radius: 8px;
+    background: #fff;
+    color: #0b1730;
+    outline: none;
+    transition: box-shadow .12s ease, border-color .12s ease;
+  }
+  textarea:focus {
+    border-color: rgba(11,105,255,0.9);
+    box-shadow: 0 6px 18px rgba(11,105,255,0.08);
+  }
+  
+  /* Control row */
+  .controls {
+    margin-top: 12px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  /* Buttons */
+  button {
+    appearance: none;
+    -webkit-appearance: none;
+    border: 1px solid #d0d7e6;
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    transition: transform .08s ease, box-shadow .08s ease;
+  }
+  button:active { transform: translateY(1px); }
+  button:focus { outline: none; box-shadow: 0 6px 18px rgba(11,105,255,0.08); border-color: rgba(11,105,255,0.9); }
+  
+  /* Primary / accent button — optional: add class="primary" on your Start button */
+  button.primary {
+    background: linear-gradient(180deg,#0b69ff,#0456d9);
+    color: #fff;
+    border: none;
+    box-shadow: 0 6px 18px rgba(11,105,255,0.12);
+  }
+  
+  /* Status text (aligned to right) */
+  .status {
+    margin-left: auto;
+    font-size: 13px;
+    color: #475569;
+  }
+  
+  /* Hint / small helper text */
+  .hint {
+    margin-top: 10px;
+    font-size: 13px;
+    color: #6b7280;
+  }
